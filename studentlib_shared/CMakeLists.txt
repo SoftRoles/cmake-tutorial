@@ -11,10 +11,12 @@ file(GLOB SOURCES "src/*.cpp")
 #Generate the shared library from the sources
 add_library(testStudent SHARED ${SOURCES})
 
-include (GenerateExportHeader)          
+if (WIN32)
+	include (GenerateExportHeader)          
 GENERATE_EXPORT_HEADER(testStudent           # generates the export header TESTSTUDENT_EXPORTS.h automatically
     BASE_NAME testStudent
     STATIC_DEFINE SHARED_EXPORTS_BUILT_AS_STATIC)
+endif (WIN32)
 
 target_link_libraries(testStudent)
 #Set the location for library installation -- i.e., /usr/lib in this case
